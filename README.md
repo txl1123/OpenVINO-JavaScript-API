@@ -12,7 +12,7 @@ npm install
 
 # pnpm
 pnpm install
-
+```
 
 ## Usage
 
@@ -22,8 +22,11 @@ pnpm install
 
 ```bash
 node yolov8s
-
+```
 TODO yolov8s-det, 因为暂时无cv.dnn.NMS，暂停
+
+```bash
 # pnpm
 node yolov8s-det
+```
 
