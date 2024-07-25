@@ -1,0 +1,19 @@
+{
+  "name": "openvino_js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^2.11.2",
+    "https-proxy-agent": "^7.0.5",
+    "node": "^20.15.0",
+    "opencv-wasm": "4.3.0-10",
+    "openvino-node": "^2024.2.0"
+  }
+}
