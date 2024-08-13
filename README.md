@@ -21,7 +21,7 @@ pnpm install
 已完成的yolov8-cls demo，运行方式
 
 ```bash
-node yolov8s
+node yolov8s-cls
 ```
 TODO yolov8s-det, 因为暂时无cv.dnn.NMS，暂停
 

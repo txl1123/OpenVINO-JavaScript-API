@@ -18,12 +18,7 @@ async function main(modelPath, imagePath) {
   //----------------- Step 3. Set up input -------------------------------------
   // Read input image
   const imgData = await getImageData(imagePath);
-  try {
-    let bboxes = new cv.MatOfRect2d();
-    console.log(bboxes)
-  } catch (e) {
-    console.error(e)
-  }
+
   // Use opencv-wasm to preprocess image.
   const originalImage = cv.matFromImageData(imgData);
   const image = new cv.Mat();
