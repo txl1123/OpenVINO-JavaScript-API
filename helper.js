@@ -30,6 +30,7 @@ module.exports = {
   arrayToImageData,
   displayArrayAsImage,
   matrixMultiplication,
+  normalizeImageData
 };
 
 function arrayToImageData(array, width, height) {
@@ -329,4 +330,12 @@ async function applyFolderPath(dirPath) {
 
     await mkdir(dirPath, { recursive: true });
   }
+}
+
+function normalizeImageData(imageData) {
+  const data = imageData.data;
+  for (let i = 0; i < data.length; i++) {
+    data[i] /= 255.0;
+  }
+  return imageData;
 }
