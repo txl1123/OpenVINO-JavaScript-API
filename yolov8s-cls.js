@@ -1,7 +1,7 @@
 const { addon: ov } = require('openvino-node');
 
 const { cv } = require('opencv-wasm');
-const { getImageData, normalizeImageData } = require('./helper.js');
+const { getImageData, hwcToNchw } = require('./helper.js');
 
 main('./model/yolov8s-cls.xml', './imgs/car.png');
 
@@ -17,8 +17,6 @@ async function main(modelPath, imagePath) {
   //----------------- Step 3. Set up input -------------------------------------
   // Read input image
   const imgData = await getImageData(imagePath);
-  imgData.data = new Float32Array(imgData.data);
-  normalizeImageData(imgData);
 
   // Use opencv-wasm to preprocess image.
   const originalImage = cv.matFromImageData(imgData);
@@ -29,8 +27,9 @@ async function main(modelPath, imagePath) {
   cv.resize(image, image, new cv.Size(224, 224));
 
   const tensorData = new Float32Array(image.data);
+  const data = hwcToNchw(tensorData, image.rows, image.cols, 3);
 
-  const inputTensor = new ov.Tensor(ov.element.f32, Int32Array.from([1, 3, 224, 224]), tensorData);
+  const inputTensor = new ov.Tensor(ov.element.f32, Int32Array.from([1, 3, 224, 224]), data);
 
 
   //----------------- Step 5. Loading model to the device ----------------------

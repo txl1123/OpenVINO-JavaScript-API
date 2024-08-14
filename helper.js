@@ -30,7 +30,8 @@ module.exports = {
   arrayToImageData,
   displayArrayAsImage,
   matrixMultiplication,
-  normalizeImageData
+  normalizeImageData,
+  hwcToNchw
 };
 
 function arrayToImageData(array, width, height) {
@@ -338,4 +339,20 @@ function normalizeImageData(imageData) {
     data[i] /= 255.0;
   }
   return imageData;
+}
+
+function hwcToNchw(data, height, width, channels) {
+  const nchwData = new Float32Array(channels * height * width);
+
+  for (let c = 0; c < channels; c++) {
+    for (let h = 0; h < height; h++) {
+      for (let w = 0; w < width; w++) {
+        const hwcIndex = h * width * channels + w * channels + c;
+        const nchwIndex = c * height * width + h * width + w;
+        nchwData[nchwIndex] = data[hwcIndex] / 255.0;
+      }
+    }
+  }
+
+  return nchwData;
 }
