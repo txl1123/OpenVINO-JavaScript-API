@@ -54,11 +54,13 @@ async function main(modelPath, imagePath) {
       predictionA === predictionB ? 0 : predictionA > predictionB ? -1 : 1);
   const imagenetClassesMap = require("./assets/datasets/imagenet_class_index.json");
   const imagenetClasses = ["background", ...Object.values(imagenetClassesMap)];
+  const imagenetData = require("./assets/datasets/yolov8-imagenet.json");
+  const classNameMap = imagenetData.names;
   console.log(`Image path: ${imagePath}`);
   console.log('Top 10 results:');
   console.log('class_id probability');
   console.log('--------------------');
   predictions.slice(0, 10).forEach(({ classId, prediction }) =>
-    console.log(`${classId}\t ${prediction.toFixed(7)}\t ${imagenetClasses[classId][1]}`),
+    console.log(`${classId}\t ${prediction.toFixed(7)}\t ${imagenetClasses[classId][1]}\t ${classNameMap[classId]}`),
   );
 }
